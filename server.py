@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 ROOT = Path(__file__).resolve().parent
 DB_PATH = os.getenv("DATABASE_PATH", str(ROOT / "smartshopper.db"))
-app = Flask(__name__, static_folder="public", static_url_path="")
+app = Flask(__name__, static_folder=".", static_url_path="")
 app.secret_key = os.getenv("SECRET_KEY", "CHANGE_ME_BEFORE_DEPLOYMENT")
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
