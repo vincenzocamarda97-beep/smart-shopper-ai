@@ -1,0 +1,9 @@
+{
+  "name": "Smart Shopper AI",
+  "short_name": "Smart Shopper",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#17131d",
+  "theme_color": "#873ce1",
+  "description": "Confronta e salva prodotti per Svizzera e Italia."
+}

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#873ce1"><meta name="description" content="Smart Shopper AI: ricerca e confronto acquisti per Svizzera e Italia.">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg">
+<title>Smart Shopper AI</title>
+<style>
+:root{color-scheme:dark;--bg:#17131d;--panel:#211a2b;--gold:#ffd65a;--muted:#c7b9c9;--pink:#ff4f9a;--cyan:#43d9e6;--orange:#ff8b38;--violet:#8757ed}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 8% 5%,#42204c 0,transparent 35%),radial-gradient(ellipse at 95% 22%,#123d56 0,transparent 32%),var(--bg);color:#fff8f0;font:15px system-ui,-apple-system,sans-serif}
+header{padding:20px 16px 23px;background:linear-gradient(115deg,#ec398b,#873ce1 38%,#147eaa 72%,#f58b32);border-bottom:3px solid var(--gold)}
+.wrap{max-width:950px;margin:auto;padding:16px}.brand{font-weight:950;letter-spacing:1.5px;font-size:21px}.muted{color:var(--muted);font-size:12px}.gold{color:var(--gold)}h1{font-size:30px;line-height:1.1;margin:25px 0 8px}h2{font-size:19px;margin:23px 0 10px}
+.panel{background:linear-gradient(135deg,#2b2038,#211a2b 65%,#25213b);border:1px solid #704c82;border-radius:18px;padding:15px;margin:13px 0;box-shadow:0 8px 25px #08051055}
+input,select,button{font:inherit;border-radius:11px;padding:11px;border:1px solid #725b82}input,select{background:#30243a;color:white;width:100%;min-width:0}button{cursor:pointer;color:white;background:#392947}.primary{background:linear-gradient(100deg,#ffd65a,#ff9e45);color:#31172b;border:0;font-weight:850}
+.row{display:flex;gap:8px;align-items:center}.row>*{min-width:0}.searchrow{display:grid;grid-template-columns:1fr auto;gap:8px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:10px}.chips{display:flex;gap:7px;flex-wrap:wrap}.chip{border-radius:24px;font-size:12px;background:#392947}.chip.active{background:linear-gradient(100deg,#ff4f9a,#8757ed,#24b9ca);border-color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{background:linear-gradient(145deg,#2b2038,#211a2b);border:1px solid #694d78;border-radius:16px;overflow:hidden}.photo{height:105px;display:grid;place-items:center;font-size:43px}.card:nth-child(4n+1) .photo{background:linear-gradient(135deg,#ff4f9a,#713fd0)}.card:nth-child(4n+2) .photo{background:linear-gradient(135deg,#0b9fba,#5945bc)}.card:nth-child(4n+3) .photo{background:linear-gradient(135deg,#ff9b38,#e84b72)}.card:nth-child(4n) .photo{background:linear-gradient(135deg,#48a76c,#147d9a)}.body{padding:11px}.price{font-weight:900;color:var(--gold);font-size:18px}.tiny{font-size:11px;color:var(--muted)}.action{font-size:12px;padding:7px 9px}.heart{background:none;border:0;color:var(--gold);font-size:20px;padding:2px}
+nav{position:sticky;bottom:0;display:flex;justify-content:space-around;background:#17131df2;backdrop-filter:blur(12px);border-top:1px solid #55435e;padding:8px 3px calc(8px + env(safe-area-inset-bottom));z-index:5}
+.tab{background:none;border:0;color:#c7b9c9;font-size:11px;padding:7px 9px}.tab.active{color:var(--gold);border-bottom:2px solid var(--gold)}
+.page{display:none}.page.active{display:block}.shop{display:flex;flex-direction:column;text-decoration:none;color:white;padding:12px;border-radius:13px;background:linear-gradient(135deg,#ec398b,#713fd0);border:1px solid #a76be0}.shop:nth-child(3n+2){background:linear-gradient(135deg,#087e9e,#3e43a2)}.shop:nth-child(3n){background:linear-gradient(135deg,#f08a32,#c63c76)}
+.badge{display:inline-block;border:1px solid #8c6d9b;border-radius:20px;padding:3px 7px;font-size:10px;color:#f4d8ff}.notice{background:#342a38;border-left:3px solid var(--gold);padding:10px;border-radius:8px;font-size:12px;color:#ddd}
+.modal{position:fixed;inset:0;background:#08050bcc;display:none;align-items:flex-end;justify-content:center;z-index:10;padding:12px}.modal.open{display:flex}.dialog{width:min(600px,100%);max-height:85vh;overflow:auto;background:#211a2b;border:1px solid #805b91;border-radius:20px;padding:18px}
+footer{text-align:center;padding:22px;color:var(--muted);font-size:11px}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}h1{font-size:38px}.modal{align-items:center}}
+</style></head>
+<body>
+<header><div class="wrap">
+ <div class="brand">SMART SHOPPER <span style="color:#fff">AI</span> ✦</div><div class="tiny" style="color:#fff">SHOP SMARTER · LIVE BETTER</div>
+ <h1>Il prezzo giusto.<br><span style="color:#fff3a9">Senza perdere tempo.</span></h1>
+ <p style="color:#fff">Cerca, salva e confronta prodotti per Svizzera e Italia.</p>
+</div></header>
+<main class="wrap">
+<section id="home" class="page active">
+ <div class="panel">
+  <div class="gold tiny" style="font-weight:900;letter-spacing:1px">✦ RICERCA INTELLIGENTE</div>
+  <div class="searchrow" style="margin:10px 0"><input id="query" placeholder="Es. robot da cucina per pane e brioche"><button class="primary" id="search">Cerca ✦</button></div>
+  <div class="controls"><label class="tiny">Destinazione<select id="market"><option value="ch">🇨🇭 Svizzera · CHF</option><option value="it">🇮🇹 Italia · EUR</option></select></label><label class="tiny">Budget massimo<input id="budget" type="number" min="0" placeholder="Es. 200"></label></div>
+  <p class="tiny">Il catalogo dimostrativo aiuta a provare l'app. Le ricerche nei negozi aprono i loro risultati pubblici.</p>
+ </div>
+ <h2>Categorie</h2><div class="chips" id="categories"></div>
+ <div class="row" style="justify-content:space-between;margin-top:23px"><h2 style="margin:0">Idee per te</h2><select id="sort" style="width:auto;font-size:12px"><option value="price">Prezzo</option><option value="rating">Valutazione</option></select></div>
+ <div class="tiny" id="count" style="margin:6px 0 10px"></div><div class="grid" id="products"></div>
+ <div class="panel"><div class="gold tiny">ASSISTENTE SHOPPER</div><h3>Che cosa vuoi comprare?</h3><p class="muted">Descrivi budget e caratteristiche: ti aiutiamo a restringere la ricerca nel catalogo dimostrativo.</p><div class="searchrow"><input id="assistant-query" placeholder="Es. laptop leggero sotto 900 CHF"><button class="primary" id="assistant-go">➜</button></div><div id="assistant-answer" class="muted" style="margin-top:10px" aria-live="polite"></div></div>
+</section>
+<section id="favorites" class="page"><h2>♡ I tuoi preferiti</h2><p class="muted">Prodotti salvati su questo dispositivo.</p><div class="grid" id="saved-products"></div><div id="saved-empty" class="notice">Non hai ancora salvato prodotti. Tocca il cuore su una scheda.</div></section>
+<section id="compare" class="page"><h2>⇄ Confronta</h2><p class="muted">Aggiungi prodotti al confronto dalla scheda prodotto.</p><div id="compare-list"></div><div id="compare-empty" class="notice">Nessun prodotto selezionato per il confronto.</div></section>
+<section id="shops" class="page"><h2>✦ Negozi online</h2><p class="muted">Ricerca pubblica nei negozi conosciuti. Verifica sempre destinazione, venditore, costi e tempi di spedizione al checkout.</p><div class="panel"><label class="tiny">Cosa cerchi?<input id="shop-query" placeholder="Es. aspirapolvere Dyson"></label><div class="controls" style="margin-top:10px"><label class="tiny">Destinazione<select id="shop-market"><option value="ch">Svizzera</option><option value="it">Italia</option></select></label><button class="primary" id="shop-search" style="align-self:end">Aggiorna ricerche</button></div></div><div id="shop-links" class="grid"></div><p class="notice" style="margin-top:15px">Questi collegamenti non costituiscono integrazioni API: Smart Shopper non legge automaticamente i prezzi dei negozi e non riceve commissioni affiliate in questa versione.</p></section>
+<section id="account" class="page"><h2>⚙️ Il tuo Smart Shopper</h2><div class="panel"><h3>Preferenze</h3><label class="tiny">Mercato predefinito<select id="pref-market"><option value="ch">Svizzera · CHF</option><option value="it">Italia · EUR</option></select></label><p class="muted">Le preferenze e i preferiti sono salvati localmente sul dispositivo. Non esiste ancora un account cloud.</p></div><div class="panel"><h3>Smart Shopper PRO</h3><p class="muted">In una versione futura: avvisi automatici sui ribassi, storico prezzi e confronti avanzati.</p><span class="badge">Abbonamenti non ancora attivi</span></div><div class="panel"><h3>Privacy e trasparenza</h3><p class="muted">Questa versione non raccoglie account, pagamenti o dati bancari. Le ricerche esterne aprono i siti dei venditori. Consulta le loro condizioni prima di acquistare.</p></div></section>
+</main>
+<nav>
+ <button class="tab active" data-page="home">⌂<br>Home</button><button class="tab" data-page="favorites">♡<br>Preferiti</button><button class="tab" data-page="compare">⇄<br>Confronta</button><button class="tab" data-page="shops">◎<br>Negozi</button><button class="tab" data-page="account">☻<br>Profilo</button>
+</nav>
+<div class="modal" id="modal"><div class="dialog"><div class="row" style="justify-content:space-between"><h2 id="modal-title" style="margin:0">Prodotto</h2><button id="close-modal">✕</button></div><div id="modal-content"></div></div></div>
+<footer>SMART SHOPPER AI · MVP · Catalogo demo e collegamenti pubblici</footer>
+<script src="app.js"></script></body></html>
