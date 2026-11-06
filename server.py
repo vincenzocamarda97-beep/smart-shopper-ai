@@ -100,7 +100,7 @@ def admin_required(fn):
     @wraps(fn)
     def wrapper(*a, **kw):
         if not session.get("is_admin"):
-            return send_from_directory("public",
+            return jsonify(error="Permessi amministratore richiesti"), 403
         return fn(*a, **kw)
     return wrapper
 
