@@ -51,7 +51,7 @@ function filtered(){
     "phon":["asciugacapelli","asciugatura","capelli"]
   };
 
-  let terms=q.split(/\s+/).filter(t=>t.length>2&&!["per","del","della","con","una","uno"].includes(t));
+let terms=q.split(/\s+/).filter(t=>t.length>2&&!["per","del","della","con","una","uno"].includes(t));
   let expanded=[...terms];
 
   for(const [key,words] of Object.entries(synonyms)){
