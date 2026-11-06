@@ -33,6 +33,11 @@ let category="Tutti",favorites=JSON.parse(localStorage.getItem("ssa-favs")||"[]"
 const market=()=>$("market").value, money=n=>market()==="ch"?"CHF "+n.toFixed(2):"€ "+n.toFixed(2);
 function card(p){return `<article class="card"><div class="photo">${p.e}</div><div class="body"><div class="tiny">${p.c} · ★ ${p.r}</div><b>${p.n}</b><p class="tiny">${p.d}</p><div class="price">${money(p[market()])}</div><div class="row" style="margin-top:8px;flex-wrap:wrap"><button class="action" data-detail="${p.id}">Dettagli</button><button class="action" data-compare="${p.id}">${comparison.includes(p.id)?"✓ Confronto":"⇄ Confronta"}</button><button class="heart" data-fav="${p.id}">${favorites.includes(p.id)?"♥":"♡"}</button></div></div></article>`}
 function filtered(){let q=$("query").value.trim().toLowerCase(),b=Number($("budget").value),arr=products.filter(p=>(category==="Tutti"||p.c===category)&&(!q||(p.n+" "+p.c+" "+p.d).toLowerCase().includes(q))&&(!b||p[market()]<=b));arr.sort($("sort").value==="rating"?(a,b)=>b.r-a.r:(a,b)=>a[market()]-b[market()]);return arr}
+function renderProducts(){
+  let arr=filtered();
+  $("products").innerHTML=arr.map(card).join("")||'<div class="notice">Nessun risultato: modifica la ricerca o il budget.</div>';
+  $("count").textContent=arr.length+" prodotti nel catalogo dimostrativo.";
+}
 
 function filtered(){
   let q=$("query").value.trim().toLowerCase();
