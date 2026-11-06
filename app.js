@@ -33,7 +33,49 @@ let category="Tutti",favorites=JSON.parse(localStorage.getItem("ssa-favs")||"[]"
 const market=()=>$("market").value, money=n=>market()==="ch"?"CHF "+n.toFixed(2):"€ "+n.toFixed(2);
 function card(p){return `<article class="card"><div class="photo">${p.e}</div><div class="body"><div class="tiny">${p.c} · ★ ${p.r}</div><b>${p.n}</b><p class="tiny">${p.d}</p><div class="price">${money(p[market()])}</div><div class="row" style="margin-top:8px;flex-wrap:wrap"><button class="action" data-detail="${p.id}">Dettagli</button><button class="action" data-compare="${p.id}">${comparison.includes(p.id)?"✓ Confronto":"⇄ Confronta"}</button><button class="heart" data-fav="${p.id}">${favorites.includes(p.id)?"♥":"♡"}</button></div></div></article>`}
 function filtered(){let q=$("query").value.trim().toLowerCase(),b=Number($("budget").value),arr=products.filter(p=>(category==="Tutti"||p.c===category)&&(!q||(p.n+" "+p.c+" "+p.d).toLowerCase().includes(q))&&(!b||p[market()]<=b));arr.sort($("sort").value==="rating"?(a,b)=>b.r-a.r:(a,b)=>a[market()]-b[market()]);return arr}
-function renderProducts(){let arr=filtered();$("products").innerHTML=arr.map(card).join("")||'<div class="notice">Nessun risultato: modifica la ricerca o il budget.</div>';$("count").textContent=arr.length+" prodotti nel catalogo dimostrativo."}
+
+function filtered(){
+  let q=$("query").value.trim().toLowerCase();
+  let b=Number($("budget").value);
+
+  const synonyms={
+    "robot da cucina":["robot","impastatrice","planetaria","pane","brioche","impasti","dolci"],
+    "robot aspirapolvere":["aspirapolvere","pulizia","pavimenti","casa"],
+    "macbook":["computer","portatile","laptop","apple"],
+    "friggitrice":["air fryer","friggitrice ad aria","frittura"],
+    "phon":["asciugacapelli","asciugatura","capelli"]
+  };
+
+  let terms=q.split(/\s+/).filter(Boolean);
+  let expanded=[...terms];
+
+  for(const [key,words] of Object.entries(synonyms)){
+    if(terms.some(t=>key.includes(t)||t.includes(key))){
+      expanded.push(...words);
+    }
+  }
+
+  let arr=products
+    .filter(p=>(category==="Tutti"||p.c===category)&&(!b||p[market()]<=b))
+    .map(p=>{
+      let text=(p.n+" "+p.c+" "+p.d).toLowerCase();
+      let score=0;
+      for(const term of expanded){
+        if(text.includes(term)) score+=terms.includes(term)?5:2;
+      }
+      return {...p,_score:score};
+    })
+    .filter(p=>!q||p._score>0);
+
+  arr.sort((a,b)=>{
+    if(q&&b._score!==a._score) return b._score-a._score;
+    if($("sort").value==="rating") return b.r-a.r;
+    return a[market()]-b[market()];
+  });
+
+  return arr;
+}
+
 function renderFavorites(){$("saved-products").innerHTML=products.filter(p=>favorites.includes(p.id)).map(card).join("");$("saved-empty").hidden=favorites.length>0}
 function renderCompare(){let arr=products.filter(p=>comparison.includes(p.id));$("compare-list").innerHTML=arr.map(p=>`<div class="panel"><div class="row"><span style="font-size:28px">${p.e}</span><div style="flex:1"><b>${p.n}</b><div class="price">${money(p[market()])}</div><div class="tiny">${p.d}</div></div><button data-remove-compare="${p.id}">Rimuovi</button></div></div>`).join("");$("compare-empty").hidden=arr.length>0}
 function renderShops(){let q=$("shop-query").value.trim()||"prodotti";$("shop-links").innerHTML=shops.map(s=>`<a class="shop" target="_blank" rel="noopener noreferrer" href="${s.url+encodeURIComponent(q)}"><b>${s.name} ↗</b><span class="tiny" style="color:#fff">${s.sub}</span></a>`).join("")}
