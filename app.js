@@ -14,30 +14,19 @@ const shopCatalog = [
   {name:"Amazon Svizzera",country:"CH",sub:"Marketplace",url:"https://www.amazon.ch/s?k="},
   {name:"eBay Svizzera",country:"CH",sub:"Marketplace",url:"https://www.ebay.ch/sch/i.html?_nkw="},
   {name:"Amazon Italia",country:"IT",sub:"Marketplace",url:"https://www.amazon.it/s?k="},
-  {name:"eBay Italia",country:"IT",sub:"Marketplace",url:"https://www.ebay.it/sch/i.html?_nkw="},  {name:"Amazon Germania",country:"DE",sub:"Marketplace",url:"https://www.amazon.de/s?k="},
-  {name:"AliExpress",country:"INT",sub:"Marketplace internazionale",url:"https://www.aliexpress.com/w/wholesale-"},
-  {name:"Mytheresa",country:"INT",sub:"Moda e marchi di lusso",url:"https://www.mytheresa.com/ch/en/"},
-  {name:"Farfetch",country:"INT",sub:"Moda e lusso internazionale",url:"https://www.farfetch.com//* Smart Shopper AI - frontend collegato alle API Flask */
-const $ = id => document.getElementById(id);
-
-const shopCatalog = [
-  {name:"Galaxus",country:"CH",sub:"Casa, tecnologia e lifestyle",url:"https://www.galaxus.ch/search?q="},
-  {name:"Digitec",country:"CH",sub:"Informatica ed elettronica",url:"https://www.digitec.ch/search?q="},
-  {name:"Brack.ch",country:"CH",sub:"Tecnologia, casa e ufficio",url:"https://www.brack.ch/search?query="},
-  {name:"Manor",country:"CH",sub:"Casa, bellezza e moda",url:"https://www.manor.ch/it/search?query="},
-  {name:"Interdiscount",country:"CH",sub:"Elettronica",url:"https://www.interdiscount.ch/it/search?query="},
-  {name:"MediaMarkt Svizzera",country:"CH",sub:"Elettronica",url:"https://www.mediamarkt.ch/"},
-  {name:"Migros",country:"CH",sub:"Casa e alimentari",url:"https://www.migros.ch/"},
-  {name:"Coop",country:"CH",sub:"Casa e alimentari",url:"https://www.coop.ch/"},
-  {name:"Ricardo",country:"CH",sub:"Nuovo e usato",url:"https://www.ricardo.ch/"},
-  {name:"Amazon Svizzera",country:"CH",sub:"Marketplace",url:"https://www.amazon.ch/s?k="},
-  {name:"eBay Svizzera",country:"CH",sub:"Marketplace",url:"https://www.ebay.ch/sch/i.html?_nkw="},
-  {name:"Amazon Italia",country:"IT",sub:"Marketplace",url:"https://www.amazon.it/s?k="},
-  {name:"eBay Italia",country:"IT",sub:"Marketplace",url:"https://www.ebay.it/sch/i.html?_nkw="},  {name:"Amazon Germania",country:"DE",sub:"Marketplace",url:"https://www.amazon.de/s?k="},
+  {name:"eBay Italia",country:"IT",sub:"Marketplace",url:"https://www.ebay.it/sch/i.html?_nkw="},
+  {name:"Amazon Germania",country:"DE",sub:"Marketplace",url:"https://www.amazon.de/s?k="},
   {name:"AliExpress",country:"INT",sub:"Marketplace internazionale",url:"https://www.aliexpress.com/w/wholesale-"},
   {name:"Mytheresa",country:"INT",sub:"Moda e marchi di lusso",url:"https://www.mytheresa.com/ch/en/"},
   {name:"Farfetch",country:"INT",sub:"Moda e lusso internazionale",url:"https://www.farfetch.com/ch/"},
-  {name:"NET-A-PORTER",country:"INT",sub:"Moda e designer di lusso",url:"https://www.net-a-porter.com/en-ch/"}
+  {name:"NET-A-PORTER",country:"INT",sub:"Moda e designer di lusso",url:"https://www.net-a-porter.com/en-ch/"},
+  {name:"Gucci",country:"INT",sub:"Moda e lusso italiano",url:"https://www.gucci.com/"},
+  {name:"Prada",country:"INT",sub:"Moda e accessori di lusso",url:"https://www.prada.com/"},
+  {name:"Louis Vuitton",country:"INT",sub:"Moda e pelletteria di lusso",url:"https://www.louisvuitton.com/"},
+  {name:"Dior",country:"INT",sub:"Alta moda e bellezza",url:"https://www.dior.com/"},
+  {name:"Chanel",country:"INT",sub:"Moda, profumi e accessori",url:"https://www.chanel.com/"},
+  {name:"Valentino",country:"INT",sub:"Alta moda italiana",url:"https://www.valentino.com/"},
+  {name:"Versace",country:"INT",sub:"Moda e lusso italiano",url:"https://www.versace.com/"}
 ];
 const categoryNames = ["Tutti","Tecnologia","Casa","Bellezza","Cucina"];
 const icons = {"Cucina":"🥣","Bellezza":"✨","Tecnologia":"💻","Casa":"🏠"};
