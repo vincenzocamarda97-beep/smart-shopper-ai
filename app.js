@@ -14,12 +14,12 @@ const shopCatalog = [
   {name:"Amazon Svizzera",country:"CH",sub:"Marketplace",url:"https://www.amazon.ch/s?k="},
   {name:"eBay Svizzera",country:"CH",sub:"Marketplace",url:"https://www.ebay.ch/sch/i.html?_nkw="},
   {name:"Amazon Italia",country:"IT",sub:"Marketplace",url:"https://www.amazon.it/s?k="},
-  {name:"eBay Italia",country:"IT",sub:"Marketplace",url:"https://www.ebay.it/sch/i.html?_nkw="},
-  {name:"Amazon Germania",country:"DE",sub:"Marketplace",url:"https://www.amazon.de/s?{name:"AliExpress",country:"INT",sub:"Marketplace internazionale",url:"https://www.aliexpress.com/w/wholesale-"},
-{name:"Mytheresa",country:"INT",sub:"Moda e marchi di lusso",url:"https://www.mytheresa.com/ch/en/"},
-{name:"Farfetch",country:"INT",sub:"Moda e lusso internazionale",url:"https://www.farfetch.com/ch/"},
-{name:"NET-A-PORTER",country:"INT",sub:"Moda e designer di lusso",url:"https://www.net-a-porter.com/en-ch/"}
-
+  {name:"eBay Italia",country:"IT",sub:"Marketplace",url:"https://www.ebay.it/sch/i.html?_nkw="},  {name:"Amazon Germania",country:"DE",sub:"Marketplace",url:"https://www.amazon.de/s?k="},
+  {name:"AliExpress",country:"INT",sub:"Marketplace internazionale",url:"https://www.aliexpress.com/w/wholesale-"},
+  {name:"Mytheresa",country:"INT",sub:"Moda e marchi di lusso",url:"https://www.mytheresa.com/ch/en/"},
+  {name:"Farfetch",country:"INT",sub:"Moda e lusso internazionale",url:"https://www.farfetch.com/ch/"},
+  {name:"NET-A-PORTER",country:"INT",sub:"Moda e designer di lusso",url:"https://www.net-a-porter.com/en-ch/"}
+];
 const categoryNames = ["Tutti","Tecnologia","Casa","Bellezza","Cucina"];
 const icons = {"Cucina":"🥣","Bellezza":"✨","Tecnologia":"💻","Casa":"🏠"};
 
