@@ -182,4 +182,111 @@ function renderDetail(id) {
 function updateAll() {
   renderShops();
   loadProducts();
-}
+}// SMART SHOPPER AI - ATTIVAZIONE FUNZIONI
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Ricerca prodotti
+  $("query").addEventListener("keydown", e => {
+    if (e.key === "Enter") loadProducts();
+  });
+
+  $("budget").addEventListener("keydown", e => {
+    if (e.key === "Enter") loadProducts();
+  });
+
+  $("market").addEventListener("change", loadProducts);
+  $("sort").addEventListener("change", renderProducts);
+
+  // Categorie
+  const categories = $("categories");
+
+  if (categories) {
+    categories.innerHTML = categoryNames.map(name =>
+      `<button class="action" data-category="${escapeHtml(name)}">
+        ${escapeHtml(name)}
+      </button>`
+    ).join("");
+
+    categories.addEventListener("click", e => {
+      const btn = e.target.closest("[data-category]");
+      if (!btn) return;
+      category = btn.dataset.category;
+      loadProducts();
+    });
+  }
+
+  // Preferiti e confronti
+  document.addEventListener("click", e => {
+    const fav = e.target.closest("[data-fav]");
+    const compare = e.target.closest("[data-compare]");
+    const detail = e.target.closest("[data-detail]");
+    const remove = e.target.closest("[data-remove-compare]");
+
+    if (fav) {
+      const id = Number(fav.dataset.fav);
+      favorites = favorites.includes(id)
+        ? favorites.filter(x => x !== id)
+        : [...favorites, id];
+
+      localStorage.setItem("ssa-favs", JSON.stringify(favorites));
+      renderProducts();
+      renderFavorites();
+    }
+
+    if (compare) {
+      const id = Number(compare.dataset.compare);
+      comparison = comparison.includes(id)
+        ? comparison.filter(x => x !== id)
+        : [...comparison, id];
+
+      localStorage.setItem("ssa-compare", JSON.stringify(comparison));
+      renderProducts();
+      renderCompare();
+    }
+
+    if (detail) renderDetail(Number(detail.dataset.detail));
+
+    if (remove) {
+      comparison = comparison.filter(
+        x => x !== Number(remove.dataset.removeCompare)
+      );
+      localStorage.setItem("ssa-compare", JSON.stringify(comparison));
+      renderCompare();
+      renderProducts();
+    }
+  });
+
+  // Ricerca nei negozi
+  $("shop-query").addEventListener("input", renderShops);
+  $("shop-market").addEventListener("change", renderShops);
+
+  // Navigazione
+  document.querySelectorAll("[data-page]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".page").forEach(p =>
+        p.classList.remove("active")
+      );
+
+      const page = $(btn.dataset.page);
+      if (page) page.classList.add("active");
+
+      document.querySelectorAll("[data-page]").forEach(b =>
+        b.classList.remove("active")
+      );
+
+      btn.classList.add("active");
+    });
+  });
+
+  // Chiusura finestra dettagli
+  $("modal").addEventListener("click", e => {
+    if (e.target === $("modal")) {
+      $("modal").classList.remove("open");
+    }
+  });
+
+  // Avvio catalogo
+  updateAll();
+
+});
