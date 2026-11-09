@@ -235,16 +235,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (compare) {
-      const id = Number(compare.dataset.compare);
-      comparison = comparison.includes(id)
-        ? comparison.filter(x => x !== id)
-        : [...comparison, id];
+  e.preventDefault();
 
-      localStorage.setItem("ssa-compare", JSON.stringify(comparison));
-      renderProducts();
-      renderCompare();
-    }
+  const id = Number(compare.dataset.compare);
 
+  if (comparison.includes(id)) {
+    comparison = comparison.filter(x => x !== id);
+    compare.textContent = "⇄ Confronta";
+  } else {
+    comparison.push(id);
+    compare.textContent = "✓ Confronto";
+  }
+
+  localStorage.setItem("ssa-compare", JSON.stringify(comparison));
+  renderCompare();
+}
     if (detail) renderDetail(Number(detail.dataset.detail));
 
     if (remove) {
